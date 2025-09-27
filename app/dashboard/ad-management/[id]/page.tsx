@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, use } from "react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
@@ -10,9 +10,9 @@ import Link from "next/link"
 import { InvoiceSuccessModal } from "@/components/modals"
 
 interface AdDetailsProps {
-  params: {
+  params: Promise<{
     id: string
-  }
+  }>
 }
 
 // Mock data for a single ad
@@ -38,7 +38,8 @@ const getAdData = (id: string) => {
 }
 
 export default function AdDetailsPage({ params }: AdDetailsProps) {
-  const ad = getAdData(params.id)
+  const resolvedParams = use(params)
+  const ad = getAdData(resolvedParams.id)
   const [showDeleteWarning, setShowDeleteWarning] = useState(false)
   const [showInvoiceSuccess, setShowInvoiceSuccess] = useState(false)
 
@@ -62,7 +63,7 @@ export default function AdDetailsPage({ params }: AdDetailsProps) {
         <div className="space-y-8">
           {/* Header with Edit Button */}
           <div className="flex justify-end">
-            <Link href={`/dashboard/ad-management/edit/${params.id}`}>
+            <Link href={`/dashboard/ad-management/edit/${resolvedParams.id}`}>
               <Button className="bg-[#2B6CB0] hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center gap-2">
                 <Edit className="w-4 h-4" />
                 Edit

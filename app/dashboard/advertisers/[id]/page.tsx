@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, use } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -12,9 +12,9 @@ import Link from "next/link"
 import Image from "next/image"
 
 interface AdvertiserDetailsProps {
-  params: {
+  params: Promise<{
     id: string
-  }
+  }>
 }
 
 // Mock data - in a real app, this would come from an API
@@ -52,7 +52,8 @@ const getAdvertiserData = (id: string) => {
 }
 
 export default function AdvertiserDetailsPage({ params }: AdvertiserDetailsProps) {
-  const advertiser = getAdvertiserData(params.id)
+  const resolvedParams = use(params)
+  const advertiser = getAdvertiserData(resolvedParams.id)
   const [showSuspendModal, setShowSuspendModal] = useState(false)
   const [showRemoveModal, setShowRemoveModal] = useState(false)
   const [isEditing, setIsEditing] = useState(false)

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useRef } from "react"
+import { useState, useRef, use } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -10,9 +10,9 @@ import { EditSuccessModal, EditFailureModal } from "@/components/modals"
 import Image from "next/image"
 
 interface EditAdBannerProps {
-  params: {
+  params: Promise<{
     id: string
-  }
+  }>
 }
 
 // Mock function to get ad data
@@ -31,7 +31,8 @@ function getAdData(id: string) {
 
 export default function EditAdBannerPage({ params }: EditAdBannerProps) {
   const router = useRouter()
-  const ad = getAdData(params.id)
+  const resolvedParams = use(params)
+  const ad = getAdData(resolvedParams.id)
   const [showEditSuccess, setShowEditSuccess] = useState(false)
   const [showEditFailure, setShowEditFailure] = useState(false)
   const [isSaving, setIsSaving] = useState(false)
@@ -100,7 +101,7 @@ export default function EditAdBannerPage({ params }: EditAdBannerProps) {
 
   const handleSuccessClose = () => {
     setShowEditSuccess(false)
-    router.push(`/dashboard/ad-management/${params.id}`)
+    router.push(`/dashboard/ad-management/${resolvedParams.id}`)
   }
 
   const handleFailureClose = () => {
@@ -149,11 +150,12 @@ export default function EditAdBannerPage({ params }: EditAdBannerProps) {
                     alt="Banner Preview"
                     width={800}
                     height={200}
+                    objectFit="cover"
                     className="w-full h-auto rounded-lg"
                   />
                   {/* Overlay with file info */}
-                  <div className="absolute bottom-4 left-4 right-4 bg-black/50 rounded-lg p-4">
-                    <div className="text-white text-center">
+                  <div className="absolute inset-0 bg-black/50 rounded-lg p-4">
+                    <div className="text-white text-center flex flex-col items-center justify-center h-full">
                       <p className="text-sm mb-1">Banner size: 800px by 200px</p>
                       <p className="text-sm mb-2">Max: 120MB, PNG, JPEG</p>
                       <input

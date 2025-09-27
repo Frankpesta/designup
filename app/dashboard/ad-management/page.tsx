@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
 import { Search, ChevronDown, Upload, MoreVertical, Flag, ShoppingCart, Eye, Edit } from "lucide-react"
 import Link from "next/link"
+import Image from "next/image"
 
 interface Ad {
   id: string
@@ -113,86 +114,84 @@ export default function AdManagementPage() {
   }
 
   const AdCard = ({ ad }: { ad: Ad }) => (
-    <div className="bg-white rounded-lg border border-gray-200 p-6 shadow-sm">
+    <div className="bg-gray-50 rounded-3xl p-6 border border-gray-100">
       {/* Header */}
-      <div className="flex items-center justify-between mb-4">
+      <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+          <div className="w-8 h-8 bg-blue-100 rounded-2xl flex items-center justify-center">
             <Flag className="w-4 h-4 text-blue-600" />
           </div>
-          <span className="text-sm font-medium text-gray-900">{ad.placement}</span>
+          <span className="text-sm text-gray-900">{ad.placement}</span>
         </div>
         <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
           <MoreVertical className="w-4 h-4 text-gray-400" />
         </Button>
       </div>
-
+  
       {/* Main Content - Two Column Layout */}
-      <div className="flex gap-4 mb-4">
+      <div className="flex gap-6 mb-8">
         {/* Left Panel - Ad Creative Preview */}
         <div className="flex-shrink-0">
-          <div className="w-32 h-24 bg-orange-500 rounded-lg relative overflow-hidden flex items-center">
+          <div className="w-48 h-48 bg-gradient-to-br from-orange-400 to-orange-500 rounded-2xl relative overflow-hidden flex flex-col justify-center items-center text-white p-4">
             {/* Shopping Cart Icon - Top Left */}
-            <div className="absolute top-2 left-2">
-              <div className="w-5 h-5 border-2 border-white rounded-sm flex items-center justify-center">
-                <ShoppingCart className="w-3 h-3 text-white" />
+            <div className="absolute top-3 left-3">
+              <div className="w-6 h-6 border-2 border-white rounded flex items-center justify-center">
+                <ShoppingCart className="w-4 h-4 text-white" />
               </div>
             </div>
             
-            {/* Text Content - Centered */}
-            <div className="flex-1 flex flex-col justify-center items-center text-white">
-              <p className="text-xs opacity-90 mb-1">Made with real wood</p>
-              <div className="text-center">
-                <h3 className="text-sm font-bold leading-tight">HOME</h3>
-                <h3 className="text-sm font-bold leading-tight">FURNITURE</h3>
+            {/* Text Content */}
+            <div className="text-center">
+              <p className="text-sm opacity-90 mb-2">Made with real wood</p>
+              <div className="space-y-1">
+                <h3 className="text-xl font-bold tracking-wide">HOME</h3>
+                <h3 className="text-xl font-bold tracking-wide">FURNITURE</h3>
               </div>
             </div>
           </div>
         </div>
-
+  
         {/* Right Panel - Ad Details */}
-        <div className="flex-1 space-y-2">
-          <div className="flex justify-between">
-            <span className="text-sm text-gray-500">Ad Title:</span>
-            <span className="text-sm font-medium text-gray-900">{ad.title}</span>
+        <div className="flex-1 space-y-4">
+          <div className="flex justify-between items-center">
+            <span className="text-gray-500">Ad Title:</span>
+            <span className="font-semibold text-gray-900">{ad.title}</span>
           </div>
           
           <div className="flex justify-between items-center">
-            <span className="text-sm text-gray-500">Status:</span>
+            <span className="text-gray-500">Status:</span>
             <div className="flex items-center gap-2">
-              <div className="w-4 h-4 bg-green-500 rounded-full flex items-center justify-center">
-                <div className="w-2 h-2 bg-white rounded-full"></div>
-              </div>
-              <span className="text-green-600 text-sm">Active (until {ad.endDate})</span>
+              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+              <span className="text-gray-900 font-medium">Active (until {ad.endDate})</span>
             </div>
           </div>
           
-          <div className="flex justify-between">
-            <span className="text-sm text-gray-500">Clicks:</span>
-            <span className="text-sm font-medium text-gray-900">{ad.clicks}</span>
+          <div className="flex justify-between items-center">
+            <span className="text-gray-500">Clicks:</span>
+            <span className="font-semibold text-gray-900">{ad.clicks}</span>
           </div>
           
-          <div className="flex justify-between">
-            <span className="text-sm text-gray-500">Impressions:</span>
-            <span className="text-sm font-medium text-gray-900">{ad.impressions}</span>
+          <div className="flex justify-between items-center">
+            <span className="text-gray-500">Impressions:</span>
+            <span className="font-semibold text-gray-900">{ad.impressions}</span>
           </div>
         </div>
       </div>
-
+  
       {/* Footer */}
-      <div className="flex items-center justify-between">
-        <Link href={`/dashboard/ad-management/${ad.id}`}>
-          <Button className="bg-blue-100 text-blue-600 hover:bg-blue-200 px-6 py-3 rounded-lg text-sm font-medium">
-            <Eye className="w-4 h-4 mr-2" />
+      <div className="flex items-center justify-between bg-blue-50 rounded-2xl px-6 py-2">
+        <Link href={`/dashboard/ad-management/${ad.id}`} className="flex items-center justify-center">
+          <Button className="bg-transparent text-blue-600 hover:bg-blue-100 px-0 py-0 text-sm border-none shadow-none">
             View
           </Button>
         </Link>
-        <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
-          <Edit className="w-4 h-4 text-gray-400" />
+        <Button variant="ghost" size="sm" className="h-8 w-8 p-0 bg-gray-400 hover:bg-gray-500 rounded-xl">
+          <Edit className="w-3 h-3 text-white" />
         </Button>
       </div>
     </div>
   )
+  
 
   return (
     <div className="min-h-screen bg-white">
@@ -208,12 +207,24 @@ export default function AdManagementPage() {
                 Keep every banner running smoothly, monitor real-time performance, and deliver visually engaging promotions — all from one dashboard.
               </p>
               <Link href="/dashboard/ad-management/upload">
-                <Button className="bg-white text-[#2B6CB0] hover:bg-blue-50 px-6 py-3 rounded-lg font-medium">
+                <Button className="bg-white text-[#2B6CB0] hover:bg-blue-50 px-4 py-3 rounded-xl font-medium">
                   <Upload className="w-5 h-5 mr-2" />
                   Upload New Ad
                 </Button>
               </Link>
             </div>
+            
+            {/* Megaphone Image - Absolute positioned at far right */}
+            <div className="absolute -bottom-20 -right-8">
+              <Image
+                src="/mic.png"
+                alt="Megaphone"
+                width={300}
+                height={300}
+                className="object-contain"
+              />
+            </div>
+            
             {/* Close button */}
             <Button 
               variant="ghost" 
@@ -225,59 +236,77 @@ export default function AdManagementPage() {
           </div>
 
           {/* Search and Filter Controls */}
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-8 flex-1">
-              <h2 className="text-2xl font-semibold text-gray-900">Ad Management</h2>
-              <div className="relative flex-1 max-w-md">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
-                <Input
-                  placeholder="Search by title, advertiser, placement"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10 bg-gray-50 border-gray-300 text-gray-900 placeholder-gray-500 rounded-lg h-10"
-                />
-              </div>
-            </div>
-            
-            <div className="flex items-center space-x-4">
-              <div className="flex items-center space-x-2">
-                <Button 
-                  onClick={() => setActiveFilter("All 6")}
-                  className={`px-4 py-2 rounded-lg text-sm ${
-                    activeFilter === "All 6" 
-                      ? "bg-blue-100 text-gray-800" 
-                      : "bg-white text-gray-600 border border-gray-300"
-                  }`}
-                >
-                  All 6
-                </Button>
-                <Button 
-                  onClick={() => setActiveFilter("Active 5")}
-                  className={`px-4 py-2 rounded-lg text-sm ${
-                    activeFilter === "Active 5" 
-                      ? "bg-blue-100 text-gray-800" 
-                      : "bg-white text-gray-600 border border-gray-300"
-                  }`}
-                >
-                  Active 5
-                </Button>
-                <Button 
-                  onClick={() => setActiveFilter("Expired 1")}
-                  className={`px-4 py-2 rounded-lg text-sm ${
-                    activeFilter === "Expired 1" 
-                      ? "bg-blue-100 text-gray-800" 
-                      : "bg-white text-gray-600 border border-gray-300"
-                  }`}
-                >
-                  Expired 1
-                </Button>
-                <Button className="bg-white text-gray-600 hover:bg-gray-50 px-4 py-2 rounded-lg text-sm border border-gray-300 flex items-center gap-2">
-                  Filter by
-                  <ChevronDown className="w-4 h-4" />
-                </Button>
-              </div>
+          <div className="bg-white p-6 border-b border-gray-200">
+      <div className="max-w-7xl mx-auto">
+        {/* Header with Title and Upload Button */}
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center gap-2">
+            <h1 className="text-xl font-medium text-gray-900">Ads Management</h1>
+            <div className="w-4 h-4 border border-gray-400 rounded-full flex items-center justify-center">
+              <span className="text-xs text-gray-500">i</span>
             </div>
           </div>
+          
+          <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-4 rounded-lg flex items-center gap-2 text-sm font-medium">
+            <Upload className="w-4 h-4" />
+            Upload New Ad
+          </button>
+        </div>
+
+        {/* Search and Filter Section */}
+        <div className="flex items-center justify-between">
+          {/* Search Bar */}
+          <div className="relative max-w-sm">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+            <input
+              type="text"
+              placeholder="Search by title, advertiser, placement"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="pl-10 pr-4 py-2.5 w-80 bg-gray-50 border-0 rounded-full text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white"
+            />
+          </div>
+          
+          {/* Filter Buttons */}
+          <div className="flex items-center gap-1">
+            <button 
+              onClick={() => setActiveFilter('All')}
+              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                activeFilter === 'All' 
+                  ? 'bg-blue-100 text-blue-700' 
+                  : 'text-gray-600 hover:text-gray-800'
+              }`}
+            >
+              All <span className="text-xs">6</span>
+            </button>
+            <button 
+              onClick={() => setActiveFilter('Active')}
+              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                activeFilter === 'Active' 
+                  ? 'bg-blue-100 text-blue-700' 
+                  : 'text-gray-600 hover:text-gray-800'
+              }`}
+            >
+              Active <span className="text-xs">5</span>
+            </button>
+            <button 
+              onClick={() => setActiveFilter('Expired')}
+              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                activeFilter === 'Expired' 
+                  ? 'bg-blue-100 text-blue-700' 
+                  : 'text-gray-600 hover:text-gray-800'
+              }`}
+            >
+              Expired <span className="text-xs">1</span>
+            </button>
+            <button className="text-gray-600 hover:text-gray-800 px-4 py-2 rounded-full text-sm font-medium flex items-center gap-1">
+              Filter by
+              <ChevronDown className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
 
           {/* Ad Cards Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
