@@ -150,7 +150,7 @@ export default function AdvertisersPage() {
 
   return (
     <div className="min-h-screen bg-white p-6">
-      <div className="max-w-7xl mx-auto">
+      <div className="mx-auto">
         <div className="space-y-6">
           {/* Top Control Panel */}
           <div className="flex items-center justify-between">
