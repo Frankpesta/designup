@@ -206,7 +206,7 @@ export default function AdvertisersPage() {
       <ChevronDown className="absolute right-2 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400 pointer-events-none" />
     </div>
     <div className="relative">
-      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-[48px] w-5 text-gray-400" />
+      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
       <Input
         placeholder="Search by advertiser name, ID"
         value={searchQuery}
@@ -224,7 +224,7 @@ export default function AdvertisersPage() {
 </div>
 
           {/* Advertisers Table */}
-          <div className="bg-white border border-gray-200 rounded-lg overflow-hidden">
+          <div className="bg-white border border-gray-200 rounded-lg overflow-x-auto">
             <Table>
               <TableHeader>
                 <TableRow className="bg-gray-50 border-b border-gray-200">
@@ -272,7 +272,7 @@ export default function AdvertisersPage() {
                     </TableCell>
 
                     {/* Advertiser Name with Avatar */}
-                    <TableCell className="px-6 py-4 whitespace-nowrap">
+                    <TableCell className="px-6 py-4">
                       <div className="flex items-center space-x-3">
                         <Avatar className="w-8 h-8">
                           <AvatarImage src="/api/placeholder/32/32" alt={advertiser.name} />
@@ -290,7 +290,7 @@ export default function AdvertisersPage() {
                     </TableCell>
 
                     {/* Email */}
-                    <TableCell className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                    <TableCell className="px-6 py-4 text-sm text-gray-600 break-all">
                       {advertiser.email}
                     </TableCell>
 
@@ -300,7 +300,7 @@ export default function AdvertisersPage() {
                     </TableCell>
 
                     {/* Status */}
-                    <TableCell className="px-6 py-4 whitespace-nowrap">
+                    <TableCell className="px-6 py-4">
                       <Badge 
                         variant={advertiser.status === "Active" ? "default" : "destructive"}
                         className={advertiser.status === "Active" 
