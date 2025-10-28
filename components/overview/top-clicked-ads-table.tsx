@@ -2,7 +2,16 @@
 
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
 import { Eye } from "lucide-react"
+import { useRouter } from "next/navigation"
 import { RedirectModal } from "@/components/modals"
 
 interface TopClickedAd {
@@ -26,6 +35,7 @@ interface TopClickedAdsTableProps {
 }
 
 export function TopClickedAdsTable({ className }: TopClickedAdsTableProps) {
+  const router = useRouter()
   const [showRedirectModal, setShowRedirectModal] = useState(false)
   const [selectedAd, setSelectedAd] = useState<TopClickedAd | null>(null)
 
@@ -36,8 +46,8 @@ export function TopClickedAdsTable({ className }: TopClickedAdsTableProps) {
 
   const handleRedirectProceed = () => {
     if (selectedAd) {
-      // This would typically redirect to the actual ad page
-      window.open(`https://example.com/ad/${selectedAd.id}`, '_blank')
+      // Redirect to the ad detail page using Next.js router
+      router.push(`/ads/${selectedAd.id}`)
     }
     setShowRedirectModal(false)
     setSelectedAd(null)
@@ -57,42 +67,39 @@ export function TopClickedAdsTable({ className }: TopClickedAdsTableProps) {
         </button>
       </div>
       
-      <div className="overflow-x-auto">
-        <table className="w-full">
-          <thead>
-            <tr className="border-b border-gray-200">
-              <th className="text-left py-3 px-2 text-sm font-medium text-gray-600">S/N</th>
-              <th className="text-left py-3 px-2 text-sm font-medium text-gray-600">Ad Title</th>
-              <th className="text-left py-3 px-2 text-sm font-medium text-gray-600">Clicks</th>
-              <th className="text-left py-3 px-2 text-sm font-medium text-gray-600">Section Uploaded</th>
-              <th className="text-left py-3 px-2 text-sm font-medium text-gray-600">Price</th>
-              <th className="text-left py-3 px-2 text-sm font-medium text-gray-600">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {topClickedAds.map((ad, index) => (
-              <tr key={ad.id} className="border-b border-gray-100">
-                <td className="py-3 px-2 text-sm text-gray-900">{index + 1}</td>
-                <td className="py-3 px-2 text-sm text-gray-900">{ad.name}</td>
-                <td className="py-3 px-2 text-sm text-gray-900">{ad.clicks.toLocaleString()}</td>
-                <td className="py-3 px-2 text-sm text-gray-900">{ad.section}</td>
-                <td className="py-3 px-2 text-sm text-gray-900">{ad.price}</td>
-                <td className="py-3 px-2">
-                  <Button 
-                    size="sm" 
-                    variant="outline" 
-                    className="h-8 px-3"
-                    onClick={() => handleViewClick(ad)}
-                  >
-                    <Eye className="w-4 h-4 mr-1" />
-                    view
-                  </Button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead className="text-sm font-medium text-gray-600">S/N</TableHead>
+            <TableHead className="text-sm font-medium text-gray-600">Ad Title</TableHead>
+            <TableHead className="text-sm font-medium text-gray-600">Clicks</TableHead>
+            <TableHead className="text-sm font-medium text-gray-600">Section Uploaded</TableHead>
+            <TableHead className="text-sm font-medium text-gray-600">Price</TableHead>
+            <TableHead className="text-sm font-medium text-gray-600">Actions</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {topClickedAds.map((ad, index) => (
+            <TableRow key={ad.id}>
+              <TableCell className="text-sm text-gray-900">{index + 1}</TableCell>
+              <TableCell className="text-sm text-gray-900">{ad.name}</TableCell>
+              <TableCell className="text-sm text-gray-900">{ad.clicks.toLocaleString()}</TableCell>
+              <TableCell className="text-sm text-gray-900">{ad.section}</TableCell>
+              <TableCell className="text-sm text-gray-900">{ad.price}</TableCell>
+              <TableCell>
+                <Button 
+                  size="sm" 
+                  variant="outline" 
+                  className="p-3 rounded-full bg-blue-100 text-blue-600 hover:bg-blue-200 hover:text-blue-700"
+                  onClick={() => handleViewClick(ad)}
+                >
+                  view
+                </Button>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
       
       {/* Redirect Modal */}
       <RedirectModal

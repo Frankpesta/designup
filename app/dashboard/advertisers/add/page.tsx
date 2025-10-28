@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { ArrowDown, ChevronDown, Upload } from "lucide-react"
+import Image from "next/image"
 
 export default function AddAdvertiserPage() {
   const [formData, setFormData] = useState({
@@ -84,8 +85,8 @@ export default function AddAdvertiserPage() {
                       </button>
                     </div>
                   ) : (
-                    <div className="flex flex-col items-center justify-center h-full">
-                      <ArrowDown className="w-8 h-8 text-gray-400 mb-4" />
+                    <div className="flex flex-col items-center justify-center h-full gap-2">
+                      <Image src='/download-p.svg' alt="download" width={100} height={100} className="w-7 h-7" />
                       <p className="text-sm font-medium text-gray-600 mb-2">Profile Picture</p>
                       <p className="text-xs text-gray-500 text-center mb-4">
                         Max: 120MB, PNG, JPEG
@@ -93,7 +94,7 @@ export default function AddAdvertiserPage() {
                       <Button
                         type="button"
                         onClick={handleBrowseFile}
-                        className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-sm"
+                        className="bg-[#2B6CB0] hover:bg-blue-600 text-white px-4 py-2 rounded-full text-sm"
                       >
                         Browse File
                       </Button>
@@ -169,13 +170,13 @@ export default function AddAdvertiserPage() {
                 type="button"
                 onClick={handleCancel}
                 variant="outline"
-                className="px-12 py-6 border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50"
+                className="px-12 py-6 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 h-[48px]"
               >
                 Cancel
               </Button>
               <Button
                 type="submit"
-                className="px-12 py-6 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+                className="px-12 py-6 bg-[#2B6CB0] text-white rounded-lg hover:bg-blue-600 h-[48px]"
               >
                 Add
               </Button>

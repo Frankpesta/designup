@@ -14,6 +14,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { Search, ChevronDown, Download, MoreVertical, RotateCcw, Bell, CheckCircle, AlertTriangle, Headphones } from "lucide-react"
+import Image from "next/image"
 
 interface Invoice {
   id: string
@@ -164,27 +165,27 @@ export default function InvoicesPage() {
     switch (status) {
       case "Pending":
         return (
-          <Badge className="bg-orange-100 text-orange-800 border-orange-200">
+          <Button className="bg-orange-100 text-orange-800 border-orange-300 rounded-full py-1 px-6 h-[26px] w-[80px]">
             {status}
-          </Badge>
+          </Button>
         )
       case "Paid":
         return (
-          <Badge className="bg-green-100 text-green-800 border-green-200">
+          <Button className="bg-green-100 text-green-800 border-green-300 rounded-full py-1 px-6 h-[26px] w-[80px]">
             {status}
-          </Badge>
+          </Button>
         )
       case "Overdue":
         return (
-          <Badge className="bg-red-100 text-red-800 border-red-200">
+          <Badge className="bg-red-100 text-red-800 border-red-300 rounded-full py-1 px-6 h-[26px] w-[80px]">
             {status}
           </Badge>
         )
       case "Cancelled":
         return (
-          <Badge className="bg-gray-100 text-gray-600 border-gray-200">
+          <Button className="bg-gray-100 text-gray-800 border-gray-300 rounded-full py-1 px-6 h-[26px] w-[80px]">
             {status}
-          </Badge>
+          </Button>
         )
       default:
         return null
@@ -198,20 +199,20 @@ export default function InvoicesPage() {
     
     if (invoice.status === "Pending") {
       menuItems.push(
-        { icon: <CheckCircle className="w-4 h-4" />, label: "Mark as paid", action: "mark-paid" },
-        { icon: <RotateCcw className="w-4 h-4" />, label: "Resend", action: "resend" },
-        { icon: <Download className="w-4 h-4" />, label: "Download", action: "download" }
+        { icon: <Image src={'/mark.svg'} alt="check" width={100} height={100} className="w-[12px] h-[12px]" />, label: "Mark as paid", action: "mark-paid" },
+        { icon: <Image src={'/resend.svg'} alt="check" width={100} height={100} className="w-[12px] h-[12px]" />, label: "Resend", action: "resend" },
+        { icon: <Image src={'/download-blue.svg'} alt="check" width={100} height={100} className="w-[12px] h-[12px]" />, label: "Download", action: "download" }
       )
     } else if (invoice.status === "Overdue") {
       menuItems.push(
-        { icon: <RotateCcw className="w-4 h-4" />, label: "Resend", action: "resend" },
-        { icon: <Bell className="w-4 h-4" />, label: "Send Reminder", action: "reminder" },
-        { icon: <Download className="w-4 h-4" />, label: "Download", action: "download" }
+        { icon: <Image src={'/resend.svg'} alt="check" width={100} height={100} className="w-[12px] h-[12px]" />, label: "Resend", action: "resend" },
+        { icon: <Image src={'/bell-blue.svg'} alt="check" width={100} height={100} className="w-[12px] h-[12px]" />, label: "Send Reminder", action: "reminder" },
+        { icon: <Image src={'/download-blue.svg'} alt="check" width={100} height={100} className="w-[12px] h-[12px]" />, label: "Download", action: "download" }
       )
     } else {
       menuItems.push(
-        { icon: <RotateCcw className="w-4 h-4" />, label: "Resend", action: "resend" },
-        { icon: <Download className="w-4 h-4" />, label: "Download", action: "download" }
+        { icon: <Image src={'/resend.svg'} alt="check" width={100} height={100} className="w-[12px] h-[12px]" />, label: "Resend", action: "resend" },
+        { icon: <Image src={'/download-blue.svg'} alt="check" width={100} height={100} className="w-[12px] h-[12px]" />, label: "Download", action: "download" }
       )
     }
 
@@ -280,34 +281,42 @@ export default function InvoicesPage() {
         
 
           {/* Search and Filter Controls */}
-          <div className="flex items-center justify-between">
-              {/* Header */}
-          <div className="flex items-center space-x-8 flex-1">
-            <h1 className="text-2xl font-semibold text-gray-900">Invoices</h1>
-            <div className="relative flex-1 max-w-md">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
-              <Input
-                placeholder="Search by Invoice ID, Advertiser, Email"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10 bg-gray-50 border-gray-300 text-gray-900 placeholder-gray-500 rounded-lg h-10"
-              />
-            </div>
-          </div>
-            
-            
-           <div className="flex items-center space-x-8">
-             <Button className="bg-white text-gray-900 hover:bg-gray-100 px-4 py-2 rounded-lg flex items-center gap-2 h-10 border border-gray-300">
-              Filter by
-              <ChevronDown className="w-4 h-4" />
-            </Button>
-            
-            <Button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 h-10">
-              <Download className="w-4 h-4" />
-              Export
-            </Button>
-           </div>
-          </div>
+          <div className="flex items-center justify-between mb-6 gap-6">
+  {/* Left Section - Title and Info Icon */}
+  <div className="flex items-center space-x-3">
+    <h1 className="text-xl font-semibold text-gray-900">Invoices</h1>
+    <Image src={'/i.svg'} alt="icon" width={100} height={100} className="w-5 h-5" />
+  </div>
+
+  {/* Center Section - Search Bar */}
+  <div className="flex-1 max-w-2xl mx-8">
+    <div className="relative">
+      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-300" />
+      <Input
+        placeholder="Search by Invoice ID, Advertiser, Email"
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        className="pl-10 bg-gray-50 border-gray-200 text-gray-900 placeholder-gray-400 rounded-lg h-11 w-full"
+      />
+    </div>
+  </div>
+  
+  {/* Right Section - Filter and Export Buttons */}
+  <div className="flex items-center space-x-4">
+    <Button 
+      variant="outline"
+      className="bg-white text-gray-600 hover:bg-gray-50 px-4 py-2 rounded-lg flex items-center gap-2 h-11 border border-gray-200"
+    >
+      Filter by
+      <ChevronDown className="w-4 h-4" />
+    </Button>
+    
+    <Button className="bg-gray-50 text-[#2B6CB0] hover:bg-blue-50 px-4 py-2 rounded-lg flex items-center gap-2  border-none shadow-none font-medium h-[48px]">
+      <Image src={'/upload-blue.svg'} width={100} height={100} alt="upload" className="w-5 h-5"/>
+      Export
+    </Button>
+  </div>
+</div>
 
           {/* Invoices Table */}
           <div className="bg-white border border-gray-200 rounded-lg overflow-hidden">
@@ -370,7 +379,7 @@ export default function InvoicesPage() {
                     <TableCell className="px-4 py-4 whitespace-nowrap text-sm text-gray-900 min-w-[120px]">
                       {invoice.invoiceId}
                     </TableCell>
-                    <TableCell className="px-4 py-4 whitespace-nowrap text-sm text-gray-900 min-w-[150px]">
+                    <TableCell className="px-4 py-4 whitespace-nowrap text-sm text-gray-900 min-w-[150px] font-bold">
                       {invoice.advertiser}
                     </TableCell>
                     <TableCell className="px-4 py-4 whitespace-nowrap text-sm text-gray-900 min-w-[200px]">
@@ -382,7 +391,7 @@ export default function InvoicesPage() {
                     <TableCell className="px-4 py-4 whitespace-nowrap text-sm text-gray-900 min-w-[100px]">
                       {invoice.dueDate}
                     </TableCell>
-                    <TableCell className="px-4 py-4 whitespace-nowrap text-sm font-semibold text-gray-900 min-w-[100px]">
+                    <TableCell className="px-4 py-4 whitespace-nowrap text-sm font-bold text-gray-900 min-w-[100px]">
                       {invoice.amount}
                     </TableCell>
                     <TableCell className="px-4 py-4 whitespace-nowrap min-w-[100px]">
@@ -393,10 +402,10 @@ export default function InvoicesPage() {
                         <Button
                           variant="ghost"
                           size="sm"
-                          className="h-8 w-8 p-0 text-gray-400 hover:text-gray-600 hover:bg-gray-100"
+                          className="h-8 w-8 p-0 text-[#2B6CB0] hover:text-blue-600 hover:bg-blue-100"
                           onClick={() => setOpenDropdown(openDropdown === invoice.id ? null : invoice.id)}
                         >
-                          <MoreVertical className="w-4 h-4" />
+                          <MoreVertical className="w-6 h-6 text-[#2B6CB0]" />
                         </Button>
                         {getActionMenu(invoice)}
                       </div>
@@ -409,7 +418,7 @@ export default function InvoicesPage() {
           </div>
 
           {/* Footer */}
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-end gap-8">
             <span className="text-sm text-gray-500">
               Showing {filteredInvoices.length} of {filteredInvoices.length}
             </span>

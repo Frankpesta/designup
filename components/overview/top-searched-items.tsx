@@ -2,9 +2,16 @@
 
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
 import { ExternalLink } from "lucide-react"
-import Image from "next/image"
-import { RedirectModal } from "@/components/modals"
+import { useRouter } from "next/navigation"
 
 interface SearchedItem {
   id: string
@@ -50,6 +57,7 @@ interface TopSearchedItemsProps {
 }
 
 export function TopSearchedItems({ className }: TopSearchedItemsProps) {
+  const router = useRouter()
   const [showRedirectModal, setShowRedirectModal] = useState(false)
   const [selectedItem, setSelectedItem] = useState<SearchedItem | null>(null)
 
@@ -60,8 +68,8 @@ export function TopSearchedItems({ className }: TopSearchedItemsProps) {
 
   const handleRedirectProceed = () => {
     if (selectedItem) {
-      // This would typically redirect to the actual item page
-      window.open(`https://example.com/item/${selectedItem.id}`, '_blank')
+      // Redirect to the item detail page using Next.js router
+      router.push(`/items/${selectedItem.id}`)
     }
     setShowRedirectModal(false)
     setSelectedItem(null)
@@ -81,54 +89,63 @@ export function TopSearchedItems({ className }: TopSearchedItemsProps) {
         </button>
       </div>
       
-      <div className="overflow-x-auto">
-        <table className="w-full">
-          <thead>
-            <tr className="border-b border-gray-200">
-              <th className="text-left py-3 px-2 text-sm font-medium text-gray-600">S/N</th>
-              <th className="text-left py-3 px-2 text-sm font-medium text-gray-600">Image</th>
-              <th className="text-left py-3 px-2 text-sm font-medium text-gray-600">Item Name</th>
-              <th className="text-left py-3 px-2 text-sm font-medium text-gray-600">Advertiser</th>
-              <th className="text-left py-3 px-2 text-sm font-medium text-gray-600">Price</th>
-              <th className="text-left py-3 px-2 text-sm font-medium text-gray-600">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {searchedItems.map((item, index) => (
-              <tr key={item.id} className="border-b border-gray-100">
-                <td className="py-3 px-2 text-sm text-gray-900">{index + 1}</td>
-                <td className="py-3 px-2">
-                  <div className="w-12 h-12 bg-orange-200 rounded-lg flex items-center justify-center">
-                    <div className="w-8 h-8 bg-orange-400 rounded-sm"></div>
-                  </div>
-                </td>
-                <td className="py-3 px-2 text-sm text-gray-900">{item.name}</td>
-                <td className="py-3 px-2 text-sm text-gray-900">{item.advertiser}</td>
-                <td className="py-3 px-2 text-sm text-gray-900">{item.price}</td>
-                <td className="py-3 px-2">
-                  <Button 
-                    size="sm" 
-                    variant="outline" 
-                    className="h-8 px-3"
-                    onClick={() => handleGoToClick(item)}
-                  >
-                    <ExternalLink className="w-4 h-4 mr-1" />
-                    Go to
-                  </Button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <Table className="overflow-x-none">
+        <TableHeader>
+          <TableRow>
+            <TableHead className="text-sm font-light text-gray-600">S/N</TableHead>
+            <TableHead className="text-sm font-light text-gray-600">Image</TableHead>
+            <TableHead className="text-sm font-light text-gray-600">Item Name</TableHead>
+            <TableHead className="text-sm font-light text-gray-600">Advertiser</TableHead>
+            <TableHead className="text-sm font-light text-gray-600">Price</TableHead>
+            <TableHead className="text-sm font-light text-gray-600">Actions</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody className="overflow-x-none">
+          {searchedItems.map((item, index) => (
+            <TableRow key={item.id} >
+              <TableCell className="text-sm text-gray-900">{index + 1}</TableCell>
+              <TableCell>
+                <div className="w-12 h-12 bg-orange-200 rounded-lg flex items-center justify-center">
+                  <div className="w-8 h-8 bg-orange-400 rounded-sm"></div>
+                </div>
+              </TableCell>
+              <TableCell className="text-gray-900">{item.name}</TableCell>
+              <TableCell className="text-gray-900">{item.advertiser}</TableCell>
+              <TableCell className="text-gray-900">{item.price}</TableCell>
+              <TableCell>
+                <Button 
+                  size="sm" 
+                  variant="outline" 
+                  className="p-3 rounded-full bg-blue-100 text-blue-600 hover:bg-blue-200 hover:text-blue-700"
+                  onClick={() => handleGoToClick(item)}
+                >
+                  Go to
+                </Button>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
       
       {/* Redirect Modal */}
-      <RedirectModal
-        isOpen={showRedirectModal}
-        onClose={handleRedirectCancel}
-        onProceed={handleRedirectProceed}
-        itemName={selectedItem?.name}
-      />
+      {showRedirectModal && selectedItem && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+            <h3 className="text-lg font-semibold mb-2">Redirect Confirmation</h3>
+            <p className="text-gray-600 mb-4">
+              You are about to view details for "{selectedItem.name}". Continue?
+            </p>
+            <div className="flex gap-3 justify-end">
+              <Button variant="outline" onClick={handleRedirectCancel}>
+                Cancel
+              </Button>
+              <Button onClick={handleRedirectProceed}>
+                Proceed
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

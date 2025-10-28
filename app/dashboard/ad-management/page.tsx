@@ -179,14 +179,14 @@ export default function AdManagementPage() {
       </div>
   
       {/* Footer */}
-      <div className="flex items-center justify-between bg-blue-50 rounded-2xl px-6 py-2">
-        <Link href={`/dashboard/ad-management/${ad.id}`} className="flex items-center justify-center">
-          <Button className="bg-transparent text-blue-600 hover:bg-blue-100 px-0 py-0 text-sm border-none shadow-none">
+      <div className="flex items-center justify-between rounded-2xl px-6 py-2">
+        <Link href={`/dashboard/ad-management/${ad.id}`} className="flex items-center justify-center bg-blue-50">
+          <Button className="flex items-center justify-center bg-blue-50 text-blue-600 hover:bg-blue-100 w-full py-6 px-46 text-sm border-none shadow-none font-semibold">
             View
           </Button>
         </Link>
-        <Button variant="ghost" size="sm" className="h-8 w-8 p-0 bg-gray-400 hover:bg-gray-500 rounded-xl">
-          <Edit className="w-3 h-3 text-white" />
+        <Button variant="ghost" size="sm">
+          <Image src={'/edit.svg'} alt="edit-icon" width={100} height={100} objectFit="cover" className="w-8 h-8" />
         </Button>
       </div>
     </div>
@@ -207,8 +207,8 @@ export default function AdManagementPage() {
                 Keep every banner running smoothly, monitor real-time performance, and deliver visually engaging promotions — all from one dashboard.
               </p>
               <Link href="/dashboard/ad-management/upload">
-                <Button className="bg-white text-[#2B6CB0] hover:bg-blue-50 px-4 py-3 rounded-xl font-medium">
-                  <Upload className="w-5 h-5 mr-2" />
+                <Button className="bg-white text-[#2B6CB0] hover:bg-blue-50 px-4 py-6 rounded-xl font-medium">
+                <Image src={'/upload-blue.svg'} alt="upload-icon" height={100} width={100} className="w-4 h-4" />
                   Upload New Ad
                 </Button>
               </Link>
@@ -242,13 +242,11 @@ export default function AdManagementPage() {
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-2">
             <h1 className="text-xl font-medium text-gray-900">Ads Management</h1>
-            <div className="w-4 h-4 border border-gray-400 rounded-full flex items-center justify-center">
-              <span className="text-xs text-gray-500">i</span>
-            </div>
+            <Image alt="icon" src={'/i.svg'} width={100} height={100} className="h-5 w-5" />
           </div>
           
           <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-4 rounded-lg flex items-center gap-2 text-sm font-medium">
-            <Upload className="w-4 h-4" />
+            <Image src={'/upload.svg'} alt="upload-icon" height={100} width={100} className="w-4 h-4" />
             Upload New Ad
           </button>
         </div>

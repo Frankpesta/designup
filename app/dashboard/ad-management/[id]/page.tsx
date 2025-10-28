@@ -64,8 +64,8 @@ export default function AdDetailsPage({ params }: AdDetailsProps) {
           {/* Header with Edit Button */}
           <div className="flex justify-end">
             <Link href={`/dashboard/ad-management/edit/${resolvedParams.id}`}>
-              <Button className="bg-[#2B6CB0] hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center gap-2">
-                <Edit className="w-4 h-4" />
+              <Button className="bg-white text-[#2B6CB0] font-semibold text-lg px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-blue-100">
+                <Image src={'/edit-blue.svg'} alt="edit" width={100} height={100} className="w-[18px] h-[18px] object-cover" />
                 Edit
               </Button>
             </Link>
@@ -175,29 +175,29 @@ export default function AdDetailsPage({ params }: AdDetailsProps) {
               
               <Button 
                 onClick={handleSendInvoice}
-                className="bg-blue-100 text-[#2B6CB0] hover:bg-blue-200 px-6 py-3 rounded-lg flex items-center gap-2"
+                className="bg-blue-100 text-[#2B6CB0] hover:bg-blue-200 px-6 py-6 rounded-lg flex items-center gap-2"
               >
-                <FileText className="w-4 h-4" />
+                <Image src={'/invoice.svg'} alt="invoice" width={100} height={100} className="w-5 h-5 object-contain" />
                 Send Invoice
               </Button>
             </div>
           </div>
 
           {/* Action Buttons */}
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-end gap-3 border rounded-lg p-8">
             <div className="flex items-center gap-4">
               <Button 
                 onClick={handleDeactivate}
-                className="bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-3 rounded-lg flex items-center gap-2"
+                className="bg-yellow-100 hover:bg-yellow-200 text-[#A68D00] px-6 py-6 rounded-lg flex items-center gap-2"
               >
-                <Eye className="w-4 h-4" />
+                <Image src={'/deactivate.svg'} alt="invoice" width={100} height={100} className="w-5 h-5 object-contain" />
                 Deactivate Ad
               </Button>
               <Button 
                 onClick={handleDelete}
-                className="bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-lg flex items-center gap-2"
+                className="bg-red-200 hover:bg-red-300 text-[#D80307] px-6 py-6 rounded-lg flex items-center gap-2"
               >
-                <Trash2 className="w-4 h-4" />
+                <Image src={'/delete-red.svg'} alt="invoice" width={100} height={100} className="w-5 h-5 object-contain" />
                 Delete Ad
               </Button>
             </div>

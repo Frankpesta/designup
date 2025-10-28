@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react"
 import { MousePointer, Clock, User, Sparkles } from "lucide-react"
 import { cn } from "@/lib/utils"
 import Link from "next/link"
+import Image from "next/image"
 
 interface Notification {
   id: string
@@ -113,9 +114,7 @@ export function NotificationDropdown() {
         onClick={() => setIsOpen(!isOpen)}
         className="p-2 rounded-full border border-gray-200 hover:bg-gray-50 transition-colors"
       >
-        <svg className="h-5 w-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-        </svg>
+        <Image src={'/bell.svg'} alt="bell" width={100} height={100} className="w-6 h-6" />
       </button>
       
       {/* Notification Badge */}

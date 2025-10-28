@@ -217,13 +217,13 @@ export default function SettingsPage() {
               <Button
                 variant="outline"
                 onClick={handleCancelClick}
-                className="px-6 py-4 border-gray-300 text-gray-700 rounded-lg bg-gray-100"
+                className="px-6 py-4 border-gray-300 text-gray-700 rounded-lg bg-gray-100 h-[48px]"
               >
                 Cancel
               </Button>
               <Button
                 onClick={handleSaveChanges}
-                className="px-6 py-4 bg-[#2B6CB0] text-white rounded-lg hover:bg-blue-600"
+                className="px-6 py-4 bg-[#2B6CB0] text-white rounded-lg hover:bg-blue-600 h-[48px]"
               >
                 Save Changes
               </Button>

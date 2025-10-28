@@ -83,11 +83,11 @@ export default function DashboardPage() {
       </div>
 
       {/* Geography and Pages Visited */}
-      <div className="grid gap-6 lg:grid-cols-3">
-        <ExpiringAdsTable />
-        <GeographyPanel />
-        <PagesVisitedPanel />
-      </div>
+      <div className="grid gap-4 lg:grid-cols-4">
+  <ExpiringAdsTable className="lg:col-span-2" />
+  <GeographyPanel className="lg:col-span-1" />
+  <PagesVisitedPanel className="lg:col-span-1" />
+</div>
 
       {/* Tables */}
       <div className="grid gap-6 lg:grid-cols-2">

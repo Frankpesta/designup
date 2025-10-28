@@ -113,32 +113,29 @@ export default function EditAdBannerPage({ params }: EditAdBannerProps) {
       <div className="max-w-7xl mx-auto p-6">
         <div className="space-y-8">
           {/* Header */}
-          <div className="flex items-center justify-between">
-            <h1 className="text-2xl font-semibold text-gray-900">Upload Banner</h1>
-          </div>
-
-          {/* Upload Banner Section - Top Center */}
-          <div className="flex justify-center">
-            <div className="flex items-center gap-4">
-              {/* Left - Upload Icon */}
-              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center">
-                <ArrowDownToLine className="w-8 h-8 text-blue-600" />
-              </div>
-              
-              {/* Dashed Line */}
-              <div className="w-16 h-0.5 bg-gray-300 border-dashed border-t-2"></div>
-              
-              {/* Right - Document Icon */}
-              <div className="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center border-2 border-gray-300">
-                <div className="w-8 h-8 bg-gray-400 rounded flex items-center justify-center">
-                  <ArrowDownToLine className="w-4 h-4 text-white rotate-180" />
-                </div>
-              </div>
-            </div>
-          </div>
+          <div className="flex items-center gap-6 max-w-xl mx-auto mb-3">
+        {/* Left - Upload Icon Circle */}
+      <div className="flex flex-col gap-2 items-center">
+      <div className="w-[48px] h-[48px] bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+          <Image src='/download.svg' alt="download-icon" width={100} height={100} className="w-[20] h-[20] object-cover" />
+          
+        </div>
+        <span className="text-xs font-light">Upload Banner</span>
+      </div>
+        
+        
+        {/* Dashed Line - takes up remaining space */}
+        <div className="flex-1 border-t-1 border-dashed border-gray-600"></div>
+        
+        {/* Right - Document Icon Circle */}
+        <div className="w-[48px] h-[48px] bg-white rounded-full border-2 flex flex-col items-center justify-center flex-shrink-0">
+          <Image src='/upload-w.svg' alt="download-icon" width={100} height={100} className="w-[20px] h-[20px] object-cover" />
+          
+        </div>
+      </div>
 
           {/* Upload Banner Section */}
-          <div className="bg-white rounded-lg border border-gray-200 p-8">
+          <div className="bg-white rounded-lg p-8 mt-24">
             <h2 className="text-xl font-semibold text-gray-900 mb-6">Upload Banner</h2>
             
             {/* Banner Preview */}
@@ -154,8 +151,9 @@ export default function EditAdBannerPage({ params }: EditAdBannerProps) {
                     className="w-full h-auto rounded-lg"
                   />
                   {/* Overlay with file info */}
-                  <div className="absolute inset-0 bg-black/50 rounded-lg p-4">
-                    <div className="text-white text-center flex flex-col items-center justify-center h-full">
+                  <div className="absolute inset-0 bg-black/40 rounded-lg p-4">
+                    <div className="text-white text-center flex flex-col gap-3 items-center justify-center h-full">
+                      <Image src={'/down.svg'} alt="download" width={100} height={100} className="w-[24px] h-[24px]" />
                       <p className="text-sm mb-1">Banner size: 800px by 200px</p>
                       <p className="text-sm mb-2">Max: 120MB, PNG, JPEG</p>
                       <input
@@ -204,7 +202,7 @@ export default function EditAdBannerPage({ params }: EditAdBannerProps) {
           </div>
 
           {/* Banner Details Section */}
-          <div className="bg-white rounded-lg border border-gray-200 p-8">
+          <div className="bg-white rounded-lgp-8">
             <h2 className="text-xl font-semibold text-gray-900 mb-6">Banner Details</h2>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -218,7 +216,7 @@ export default function EditAdBannerPage({ params }: EditAdBannerProps) {
                     id="name"
                     value={formData.name}
                     onChange={(e) => handleInputChange('name', e.target.value)}
-                    className="bg-gray-50 border-gray-300 rounded-lg h-12"
+                    className="bg-gray-50 border-gray-300 rounded-lg h-[72px]"
                   />
                 </div>
 
@@ -231,7 +229,7 @@ export default function EditAdBannerPage({ params }: EditAdBannerProps) {
                       id="advertiser"
                       value={formData.advertiser}
                       onChange={(e) => handleInputChange('advertiser', e.target.value)}
-                      className="bg-gray-50 border-gray-300 rounded-lg h-12 pr-10"
+                      className="bg-gray-50 border-gray-300 rounded-lg h-[72px] pr-10"
                     />
                     <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400 pointer-events-none" />
                   </div>
@@ -245,7 +243,7 @@ export default function EditAdBannerPage({ params }: EditAdBannerProps) {
                     id="price"
                     value={formData.price}
                     onChange={(e) => handleInputChange('price', e.target.value)}
-                    className="bg-gray-50 border-gray-300 rounded-lg h-12"
+                    className="bg-gray-50 border-gray-300 rounded-lg h-[72px]"
                   />
                 </div>
               </div>
@@ -261,7 +259,7 @@ export default function EditAdBannerPage({ params }: EditAdBannerProps) {
                       id="duration"
                       value={formData.duration}
                       onChange={(e) => handleInputChange('duration', e.target.value)}
-                      className="bg-gray-50 border-gray-300 rounded-lg h-12 pr-10"
+                      className="bg-gray-50 border-gray-300 rounded-lg h-[72px] pr-10"
                     />
                     <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400 pointer-events-none" />
                   </div>
@@ -276,7 +274,7 @@ export default function EditAdBannerPage({ params }: EditAdBannerProps) {
                       id="section"
                       value={formData.section}
                       onChange={(e) => handleInputChange('section', e.target.value)}
-                      className="bg-gray-50 border-gray-300 rounded-lg h-12 pr-10"
+                      className="bg-gray-50 border-gray-300 rounded-lg h-[72px] pr-10"
                     />
                     <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400 pointer-events-none" />
                   </div>
@@ -290,7 +288,7 @@ export default function EditAdBannerPage({ params }: EditAdBannerProps) {
                     id="destinationUrl"
                     value={formData.destinationUrl}
                     onChange={(e) => handleInputChange('destinationUrl', e.target.value)}
-                    className="bg-gray-50 border-gray-300 rounded-lg h-12"
+                    className="bg-gray-50 border-gray-300 rounded-lg h-[72px]"
                   />
                 </div>
               </div>
@@ -301,14 +299,14 @@ export default function EditAdBannerPage({ params }: EditAdBannerProps) {
               <Button
                 variant="outline"
                 onClick={handleCancel}
-                className="px-6 py-2 border-gray-300 text-gray-700 rounded-lg bg-gray-100"
+                className="px-[24px] py-[10px] border-gray-300 text-gray-700 rounded-lg bg-gray-100"
                 disabled={isSaving}
               >
                 Cancel
               </Button>
               <Button
                 onClick={handleSaveChanges}
-                className="px-6 py-2 bg-[#2B6CB0] text-white rounded-lg hover:bg-blue-700"
+                className="px-[24px] py-[10px] bg-[#2B6CB0] text-white rounded-lg hover:bg-blue-700"
                 disabled={isSaving}
               >
                 {isSaving ? "Saving..." : "Save Changes"}

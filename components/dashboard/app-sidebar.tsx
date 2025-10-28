@@ -10,12 +10,9 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
-import { Logo } from "@/components/auth/logo"
+
 import {
-  LayoutDashboard,
-  BarChart3,
-  Users,
-  Settings,
+  
   LogOut,
 } from "lucide-react"
 import Link from "next/link"
@@ -24,26 +21,26 @@ import Image from "next/image"
 const menuItems = [
   {
     title: "Overview",
-    url: "/dashboard",
-    icon: LayoutDashboard,
+    url: "/dashboard/overview",
+    icon: '/overview.svg',
     isActive: true,
   },
   {
     title: "Ad Management",
     url: "/dashboard/ad-management",
-    icon: BarChart3,
+    icon: '/ad.svg',
     isActive: false,
   },
   {
     title: "Advertisers",
     url: "/dashboard/advertisers",
-    icon: Users,
+    icon: '/advertisers.svg',
     isActive: false,
   },
   {
     title: "Settings",
     url: "/dashboard/settings",
-    icon: Settings,
+    icon: '/settings.svg',
     isActive: false,
   },
 ]
@@ -70,7 +67,7 @@ export function AppSidebar() {
                     }`}
                   >
                     <Link href={item.url}>
-                      <item.icon className={`mr-3 h-5 w-5 ${
+                      <Image src={item.icon} alt={item.title} width={20} height={20} className={`mr-3 h-5 w-5 ${
                         item.isActive ? 'text-blue-600' : 'text-gray-600'
                       }`} />
                       <span className={`font-medium ${
@@ -93,8 +90,8 @@ export function AppSidebar() {
             <SidebarMenuButton 
               className="w-full justify-start h-10 px-3 text-red-600 hover:bg-red-50 rounded-md"
             >
-              <LogOut className="mr-3 h-5 w-5" />
-              <span className="font-medium">Logout</span>
+              <Image src={'/logout.svg'} alt="logout" width={100} height={100} className="w-[20px] h-[20px]" />
+              <span className="font-medium text-base">Logout</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
